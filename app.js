@@ -68,20 +68,27 @@ function fmt(n) {
 }
 
 function refreshCategorySelects() {
-  // For tx form: only categories matching current tx type
   const currentType = txType.value;
+
+  // Transaction form category select (only matching type)
   txCategory.innerHTML = '';
-  state.categories
-    .filter(c => c.type === currentType)
-    .forEach(c => {
+  const matches = state.categories.filter(c => c.type === currentType);
+  if (matches.length === 0) {
+    const opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = 'No categories — add one below';
+    txCategory.appendChild(opt);
+  } else {
+    matches.forEach(c => {
       const opt = document.createElement('option');
       opt.value = c.id;
       opt.textContent = c.name;
       txCategory.appendChild(opt);
     });
+  }
 
-  // For filter select: all categories
-  const val = fCategory.value || 'all';
+  // Filter select (all categories)
+  const prev = fCategory.value || 'all';
   fCategory.innerHTML = '';
   const all = document.createElement('option');
   all.value = 'all';
@@ -93,7 +100,7 @@ function refreshCategorySelects() {
     opt.textContent = `${c.name} (${c.type})`;
     fCategory.appendChild(opt);
   });
-  fCategory.value = val;
+  fCategory.value = prev;
 }
 
 function renderCategories() {
@@ -158,3 +165,4 @@ function render() {
 
 // Events
 txType.addEventListener('change', refreshCategory
+
