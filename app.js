@@ -164,5 +164,77 @@ function render() {
 }
 
 // Events
-txType.addEventListener('change', refreshCategory
+txType.addEventListener('change', refreshCategorySelects);
 
+txForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const tx = {
+    id: uid('tx'),
+    type: txType.value,
+    amount: Number(txAmount.value),
+    date: txDate.value,
+    categoryId: txCategory.value,
+    note: txNote.value.trim(),
+    createdAt: Date.now()
+  };
+  if (!tx.date || !tx.categoryId || !(tx.amount >= 0)) return;
+  addTransaction(tx);
+  state.transactions = getTransactions();
+  txAmount.value = '';
+  txNote.value = '';
+  render();
+});
+
+catForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = catName.value.trim();
+  const type = catType.value;
+  if (!name) return;
+  addCategory({ id: uid('cat'), name, type });
+  state.categories = getCategories();
+  catName.value = '';
+  render();
+});
+
+filterForm.addEventListener('submit', e => {
+  e.preventDefault();
+  state.filters = {
+    type: fType.value,
+    category: fCategory.value,
+    from: fFrom.value || null,
+    to: fTo.value || null,
+    min: fMin.value,
+    max: fMax.value,
+    sort: fSort.value
+  };
+  render();
+});
+
+btnReset.addEventListener('click', () => {
+  fType.value = 'all';
+  fCategory.value = 'all';
+  fFrom.value = '';
+  fTo.value = '';
+  fMin.value = '';
+  fMax.value = '';
+  fSort.value = 'date_desc';
+  state.filters = {
+    type: 'all',
+    category: 'all',
+    from: null,
+    to: null,
+    min: null,
+    max: null,
+    sort: 'date_desc'
+  };
+  render();
+});
+
+btnExport.addEventListener('click', () => {
+  const rows = applyFilters(state.transactions, state.filters);
+  const csv = toCSV(rows, state.categories);
+  downloadCSV(csv, 'finance-tracker.csv');
+});
+
+// First paint
+render();
