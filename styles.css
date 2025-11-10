@@ -1,0 +1,31 @@
+:root{
+--bg:#0b0e14; --panel:#121826; --muted:#8aa2c0; --text:#e6eef8; --accent:#69d2e7; --danger:#ff6b6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.container{max-width:1000px;margin:0 auto;padding:1rem}
+header h1{margin:.2rem 0}
+.sub{color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:860px){.grid{grid-template-columns:1fr 1fr}.col-span-2{grid-column:1/-1}}
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.card{background:var(--panel);border-radius:14px;padding:1rem;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.card .value{font-size:1.6rem;font-weight:700;margin-top:.5rem}
+.panel{background:var(--panel);border-radius:14px;padding:1rem;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.form .row{display:flex;gap:.6rem;align-items:center;margin:.6rem 0}
+.form .row label{width:120px;color:var(--muted)}
+.form .row input,.form .row select{flex:1;background:#0e1422;border:1px solid #1d2740;color:var(--text);padding:.55rem .6rem;border-radius:10px}
+.form.small .row label{width:110px}
+.btn{background:var(--accent);border:none;color:#06202a;font-weight:700;padding:.6rem .9rem;border-radius:10px;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid #28445a;color:var(--text)}
+.cat-list{list-style:none;margin:.6rem 0 0;padding:0;max-height:170px;overflow:auto}
+.cat-item{display:flex;justify-content:space-between;align-items:center;background:#0f1525;border:1px solid #1a2340;padding:.5rem .7rem;border-radius:10px;margin-bottom:.4rem}
+.cat-item .tag{font-size:.75rem;opacity:.7}
+.table-wrap{overflow:auto}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border-bottom:1px solid #1a2340;padding:.6rem}
+.table th{color:var(--muted);text-align:left}
+.table .right{text-align:right}
+.table tr:hover{background:#0e1422}
+.action-del{background:transparent;border:1px solid #3a2130;color:var(--danger);padding:.3rem .5rem;border-radius:8px;cursor:pointer}
+.foot{opacity:.7;text-align:center}
