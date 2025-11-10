@@ -37,9 +37,3 @@ A no-build, no-deps personal finance tracker that runs 100% in the browser. Perf
 Open `tests.html` in a browser to run minimal unit tests for filter & summary utilities.
 
 
-## Roadmap (Nice-to-haves)
-- Edit transactions & categories
-- Recurring transactions
-- Import CSV
-- Currency selector & i18n
-- Migrate to React/TypeScript + Vitest
